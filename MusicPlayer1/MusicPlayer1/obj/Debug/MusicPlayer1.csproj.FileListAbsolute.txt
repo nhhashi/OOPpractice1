@@ -1,0 +1,10 @@
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\bin\Debug\MusicPlayer1.exe.config
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\bin\Debug\MusicPlayer1.exe
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\bin\Debug\MusicPlayer1.pdb
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.csprojAssemblyReference.cache
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.Form1.resources
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.Properties.Resources.resources
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.csproj.GenerateResource.cache
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.csproj.CoreCompileInputs.cache
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.exe
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.pdb

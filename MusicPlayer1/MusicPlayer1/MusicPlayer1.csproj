@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MusicPlayerManager\aifMusicPlayController.cs" />
+    <Compile Include="MusicPlayerManager\midMusicPlayController.cs" />
+    <Compile Include="MusicPlayerManager\mp3MusicPlayController.cs" />
+    <Compile Include="MusicPlayerManager\MusicPlayController.cs" />
+    <Compile Include="MusicPlayerManager\MusicPlayer.cs" />
+    <Compile Include="MusicPlayerManager\wavMusicPlayController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
