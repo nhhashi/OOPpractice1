@@ -86,5 +86,21 @@ namespace MusicPlayer1
 
             return "";
         }
+
+        /// <summary>
+        /// データグリッド追加関数
+        /// </summary>
+        private void displayFileNameOnDataGrid()
+        {
+            foreach (string str in pathes)
+            {
+                string[] val = str.Split('\\');
+
+
+
+                ///データグリッドの行に追加する
+                this.FileNameGridView.Rows.Add(str);
+            }
+        }
     }
 }
