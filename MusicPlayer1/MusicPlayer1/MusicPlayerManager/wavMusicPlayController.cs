@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace MusicPlayer1.MusicPlayerManager
 {
     class wavMusicPlayController : MusicPlayController
     {
         private string musicPath = string.Empty;
+
+        private SoundPlayer player;
 
         public void Pause()
         {
@@ -19,6 +22,10 @@ namespace MusicPlayer1.MusicPlayerManager
         public void Play()
         {
             MessageBox.Show("wav：再生します。曲名：" + this.musicPath);
+
+            ///再生する
+            player = new SoundPlayer(this.musicPath);
+            player.Play();
         }
 
         public void setMusicPath(string musicPath)
@@ -30,6 +37,8 @@ namespace MusicPlayer1.MusicPlayerManager
         public void Stop()
         {
             MessageBox.Show("wav：停止します。曲名：" + this.musicPath);
+
+            player.Stop();
         }
     }
 }

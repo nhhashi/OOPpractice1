@@ -8,3 +8,6 @@ C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\Musi
 C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.csproj.CoreCompileInputs.cache
 C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.exe
 C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.pdb
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\Interop.MediaPlayer.dll
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\Interop.WMPLib.dll
+C:\Users\G018C1233\Documents\polymorphismPractice\OOPpractice1\MusicPlayer1\MusicPlayer1\obj\Debug\MusicPlayer1.csproj.ResolveComReference.cache
