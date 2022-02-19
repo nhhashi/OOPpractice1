@@ -13,24 +13,33 @@ namespace MusicPlayer1
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// MusicPlayerインスタンスの変数
+        /// </summary>
         MusicPlayer _MusicPlayer;
+
+        /// <summary>
+        /// 音楽パス
+        /// </summary>
+        string[] pathes;
 
         public Form1()
         {
             InitializeComponent();
 
+            ///インスタンスの生成をする
             _MusicPlayer = new MusicPlayer();
 
-            ///wav拡張子ファイル
-            _MusicPlayer.changeMusicPlayState(new wavMusicPlayController());
+            ///音楽パスを取得する
+            pathes = FileController.getInstance().readMusicFile();
 
-            _MusicPlayer.setMusicPath("テスト曲だー");
 
-            _MusicPlayer.play();
-            _MusicPlayer.pause();
-            _MusicPlayer.stop();
+            displayFileNameOnDataGrid();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void selectExtendState()
         {
             string extend = "wav";
@@ -60,6 +69,22 @@ namespace MusicPlayer1
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private string checkIncludingString(string selectFileName)
+        {
+            foreach (string str in pathes)
+            {
+                if (str.Contains(selectFileName))
+                {
+                    return str;
+                }
+            }
+
+            return "";
         }
     }
 }
