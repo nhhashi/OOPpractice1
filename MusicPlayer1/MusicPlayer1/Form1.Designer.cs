@@ -30,17 +30,27 @@ namespace MusicPlayer1
         private void InitializeComponent()
         {
             this.FileNameGridView = new System.Windows.Forms.DataGridView();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.FileNameGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // FileNameGridView
             // 
+            this.FileNameGridView.AllowUserToAddRows = false;
             this.FileNameGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.FileNameGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FileName});
             this.FileNameGridView.Location = new System.Drawing.Point(26, 84);
             this.FileNameGridView.Name = "FileNameGridView";
+            this.FileNameGridView.RowHeadersVisible = false;
             this.FileNameGridView.RowTemplate.Height = 21;
             this.FileNameGridView.Size = new System.Drawing.Size(338, 221);
             this.FileNameGridView.TabIndex = 0;
+            // 
+            // FileName
+            // 
+            this.FileName.HeaderText = "曲名";
+            this.FileName.Name = "FileName";
             // 
             // Form1
             // 
@@ -57,7 +67,8 @@ namespace MusicPlayer1
 
         #endregion
 
-        private System.Windows.Forms.DataGridView FileNameGridView;
+        public System.Windows.Forms.DataGridView FileNameGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
     }
 }
 

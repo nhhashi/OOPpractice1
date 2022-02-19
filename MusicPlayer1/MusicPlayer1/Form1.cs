@@ -33,7 +33,8 @@ namespace MusicPlayer1
             ///音楽パスを取得する
             pathes = FileController.getInstance().readMusicFile();
 
-
+            ///データグリッドの処理をする
+            adjustRowWidth();
             displayFileNameOnDataGrid();
         }
 
@@ -72,7 +73,7 @@ namespace MusicPlayer1
         }
 
         /// <summary>
-        /// 
+        /// 選択曲文字関数
         /// </summary>
         private string checkIncludingString(string selectFileName)
         {
@@ -92,15 +93,22 @@ namespace MusicPlayer1
         /// </summary>
         private void displayFileNameOnDataGrid()
         {
+            ///パスから曲名を抽出する
+            ///データグリッドに追加する
             foreach (string str in pathes)
             {
-                string[] val = str.Split('\\');
-
-
-
-                ///データグリッドの行に追加する
-                this.FileNameGridView.Rows.Add(str);
+                string[] splitStr = str.Split('\\');
+                string[] fileName = splitStr[pathes.Length - 1].Split('.');
+                this.FileNameGridView.Rows.Add(fileName[0]);
             }
+        }
+
+        /// <summary>
+        /// データグリッドの列の幅調整関数
+        /// </summary>
+        private void adjustRowWidth()
+        {
+            this.FileNameGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
     }
 }
