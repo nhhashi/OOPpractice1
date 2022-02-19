@@ -23,6 +23,9 @@ namespace MusicPlayer1
         /// </summary>
         string[] pathes;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -30,12 +33,29 @@ namespace MusicPlayer1
             ///インスタンスの生成をする
             _MusicPlayer = new MusicPlayer();
 
+            ///Fromの初期化をする
+            Init();
+        }
+
+        /// <summary>
+        /// 初期化関数
+        /// </summary>
+        private void Init()
+        {
             ///音楽パスを取得する
             pathes = FileController.getInstance().readMusicFile();
 
-            ///データグリッドの処理をする
+            ///データグリッドの初期処理をする
             adjustRowWidth();
             displayFileNameOnDataGrid();
+
+            ///ボタンの初期処理をする
+            this.PlayButton.Text = "▶";
+            this.previousButton.Text = "◀◀";
+            this.NextButton.Text = "▶▶";
+
+            ///曲名表示ラベルの初期処理をする
+            this.SelectedFileNameLabel.Text = "選曲してください";
         }
 
         /// <summary>
@@ -110,5 +130,7 @@ namespace MusicPlayer1
         {
             this.FileNameGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+
     }
 }

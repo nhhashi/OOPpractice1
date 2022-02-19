@@ -31,7 +31,13 @@ namespace MusicPlayer1
         {
             this.FileNameGridView = new System.Windows.Forms.DataGridView();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.previousButton = new System.Windows.Forms.Button();
+            this.NextButton = new System.Windows.Forms.Button();
+            this.PlayButton = new System.Windows.Forms.Button();
+            this.SelectedFileNameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.FileNameGridView)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // FileNameGridView
@@ -52,15 +58,68 @@ namespace MusicPlayer1
             this.FileName.HeaderText = "曲名";
             this.FileName.Name = "FileName";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.previousButton);
+            this.panel1.Controls.Add(this.NextButton);
+            this.panel1.Controls.Add(this.PlayButton);
+            this.panel1.Controls.Add(this.SelectedFileNameLabel);
+            this.panel1.Location = new System.Drawing.Point(26, 311);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(337, 130);
+            this.panel1.TabIndex = 1;
+            // 
+            // previousButton
+            // 
+            this.previousButton.Location = new System.Drawing.Point(81, 58);
+            this.previousButton.Name = "previousButton";
+            this.previousButton.Size = new System.Drawing.Size(45, 24);
+            this.previousButton.TabIndex = 3;
+            this.previousButton.Text = "button3";
+            this.previousButton.UseVisualStyleBackColor = true;
+            // 
+            // NextButton
+            // 
+            this.NextButton.Location = new System.Drawing.Point(216, 58);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(45, 24);
+            this.NextButton.TabIndex = 2;
+            this.NextButton.Text = "button2";
+            this.NextButton.UseVisualStyleBackColor = true;
+            // 
+            // PlayButton
+            // 
+            this.PlayButton.Location = new System.Drawing.Point(148, 47);
+            this.PlayButton.Name = "PlayButton";
+            this.PlayButton.Size = new System.Drawing.Size(45, 35);
+            this.PlayButton.TabIndex = 1;
+            this.PlayButton.Text = "button1";
+            this.PlayButton.UseVisualStyleBackColor = true;
+            // 
+            // SelectedFileNameLabel
+            // 
+            this.SelectedFileNameLabel.AutoSize = true;
+            this.SelectedFileNameLabel.Location = new System.Drawing.Point(23, 20);
+            this.SelectedFileNameLabel.Name = "SelectedFileNameLabel";
+            this.SelectedFileNameLabel.Size = new System.Drawing.Size(35, 12);
+            this.SelectedFileNameLabel.TabIndex = 0;
+            this.SelectedFileNameLabel.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(401, 450);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.FileNameGridView);
             this.Name = "Form1";
             this.Text = "MusicPlayer";
             ((System.ComponentModel.ISupportInitialize)(this.FileNameGridView)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -69,6 +128,11 @@ namespace MusicPlayer1
 
         public System.Windows.Forms.DataGridView FileNameGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label SelectedFileNameLabel;
+        private System.Windows.Forms.Button previousButton;
+        private System.Windows.Forms.Button NextButton;
+        private System.Windows.Forms.Button PlayButton;
     }
 }
 
