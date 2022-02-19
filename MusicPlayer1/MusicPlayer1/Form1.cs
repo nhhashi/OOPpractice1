@@ -1,12 +1,5 @@
 ﻿using MusicPlayer1.MusicPlayerManager;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MusicPlayer1
@@ -24,9 +17,14 @@ namespace MusicPlayer1
         string[] pathes;
 
         /// <summary>
-        /// 
+        /// 選択曲のパス
         /// </summary>
         string selectedFilePath = string.Empty;
+
+        /// <summary>
+        /// 選択列インデックス
+        /// </summary>
+        int index = 0;
 
         /// <summary>
         /// コンストラクタ
@@ -54,6 +52,7 @@ namespace MusicPlayer1
             adjustRowWidth();
             displayFileNameOnDataGrid();
             this.FileNameGridView.Click += new EventHandler(dataGrid_Click);
+            this.FileNameGridView.SelectionChanged += new EventHandler(dataGrid_SelectionChanged);
 
             ///ボタンの初期処理をする
             this.PlayButton.Text = "▶";
@@ -68,14 +67,14 @@ namespace MusicPlayer1
         }
 
         /// <summary>
-        /// 
+        /// 拡張子によって状態を決定する関数
         /// </summary>
         private void selectExtendState()
         {
             ///拡張子の取得をする
             ///ファイル名にドットが記述されていた場合はどうするのか？
-            string[] val = this.selectedFilePath.Split('.');
-            string extend = val[1];
+            string[] extendInPath = this.selectedFilePath.Split('.');
+            string extend = extendInPath[1];
 
             switch (extend)
             {
@@ -143,15 +142,14 @@ namespace MusicPlayer1
         /// </summary>
         private void adjustRowWidth()
         {
+            ///列の幅を設定している
             this.FileNameGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         /// <summary>
-        /// データグリッドクリックイベント関数
+        /// セルの値を取得する関数
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGrid_Click(object sender, EventArgs e)
+        private void getCellValueFromDataGrid()
         {
             ///選択したセルの値を取得する
             int selectecRowIndex = this.FileNameGridView.CurrentRow.Index;
@@ -162,17 +160,68 @@ namespace MusicPlayer1
             this.selectedFilePath = checkIncludingString(selectedFileName);
         }
 
+        /// <summary>
+        /// データグリッドクリックイベント関数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGrid_Click(object sender, EventArgs e)
+        {
+            ///選択しているセルの値を取得する
+            getCellValueFromDataGrid();
+        }
+
+        private void dataGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            ///選択しているセルの値を取得する
+            getCellValueFromDataGrid();
+        }
+
+        /// <summary>
+        /// 再生管理ボタン関数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void playButton_Click(object sender, EventArgs e)
         {
+            ///拡張子を決定する
             selectExtendState();
+
+            _MusicPlayer.play();
         }
 
+        /// <summary>
+        /// 前曲管理ボタン関数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void previousButton_Click(object sender, EventArgs e)
         {
+            ///一つ前の曲を選曲する
+            index = this.FileNameGridView.CurrentRow.Index;
+            index--;
+            this.FileNameGridView.CurrentRow.Selected = false;
+            this.FileNameGridView.CurrentCell = this.FileNameGridView.Rows[index].Cells[0];
+
+            ///選択しているセルの値を取得する
+            getCellValueFromDataGrid();
         }
 
+        /// <summary>
+        /// 次曲管理ボタン関数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nextButton_Click(object sender, EventArgs e)
         {
+            ///一つ次の曲を選曲する
+            index = this.FileNameGridView.CurrentRow.Index;
+            index++;
+            this.FileNameGridView.CurrentRow.Selected = false;
+            this.FileNameGridView.CurrentCell = this.FileNameGridView.Rows[index].Cells[0];
+
+            ///選択しているセルの値を取得する
+            getCellValueFromDataGrid();
         }
     }
 }
