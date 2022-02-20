@@ -232,6 +232,7 @@ namespace MusicPlayer1
                 }
                 else ///再生中の曲が選択された場合
                 {
+                    ///現在の曲を一時停止する
                     _MusicPlayer.pause();
 
                     ///再生マーク表示
