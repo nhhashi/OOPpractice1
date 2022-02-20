@@ -171,6 +171,11 @@ namespace MusicPlayer1
             getCellValueFromDataGrid();
         }
 
+        /// <summary>
+        /// データグリッドの列選択変更処理関数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGrid_SelectionChanged(object sender, EventArgs e)
         {
             ///選択しているセルの値を取得する
@@ -200,6 +205,13 @@ namespace MusicPlayer1
             ///一つ前の曲を選曲する
             index = this.FileNameGridView.CurrentRow.Index;
             index--;
+
+            if (index < 0)
+            {
+                index++;
+                return;
+            }
+
             this.FileNameGridView.CurrentRow.Selected = false;
             this.FileNameGridView.CurrentCell = this.FileNameGridView.Rows[index].Cells[0];
 
@@ -217,6 +229,13 @@ namespace MusicPlayer1
             ///一つ次の曲を選曲する
             index = this.FileNameGridView.CurrentRow.Index;
             index++;
+
+            if (index == pathes.Length)
+            {
+                index--;
+                return;
+            }
+
             this.FileNameGridView.CurrentRow.Selected = false;
             this.FileNameGridView.CurrentCell = this.FileNameGridView.Rows[index].Cells[0];
 
