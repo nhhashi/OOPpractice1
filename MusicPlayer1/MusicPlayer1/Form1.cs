@@ -27,6 +27,12 @@ namespace MusicPlayer1
         int index = 0;
 
         /// <summary>
+        /// 再生状態
+        /// </summary>
+        MedhiaPlayState medhiaPlayState = MedhiaPlayState.STOP;
+        int nowPlayIndex = 0;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public Form1()
@@ -35,6 +41,9 @@ namespace MusicPlayer1
 
             ///インスタンスの生成をする
             _MusicPlayer = new MusicPlayer();
+
+            ///再生状態を停止にする
+            PlayState.getInstance().medhiaPlayState = medhiaPlayState;
 
             ///Fromの初期化をする
             Init();
@@ -55,7 +64,7 @@ namespace MusicPlayer1
             this.FileNameGridView.SelectionChanged += new EventHandler(dataGrid_SelectionChanged);
 
             ///ボタンの初期処理をする
-            this.PlayButton.Text = "▶";
+            playButtonText();
             this.previousButton.Text = "◀◀";
             this.NextButton.Text = "▶▶";
             this.PlayButton.Click += new EventHandler(playButton_Click);
@@ -156,7 +165,7 @@ namespace MusicPlayer1
             string selectedFileName = this.FileNameGridView.Rows[selectecRowIndex].Cells[0].Value.ToString();
             this.SelectedFileNameLabel.Text = selectedFileName;
 
-            ///再生用のパスを取得する
+            ///セル値と一致する名前を持つ再生用のパスを取得する
             this.selectedFilePath = checkIncludingString(selectedFileName);
         }
 
@@ -189,10 +198,46 @@ namespace MusicPlayer1
         /// <param name="e"></param>
         private void playButton_Click(object sender, EventArgs e)
         {
-            ///拡張子を決定する
-            selectExtendState();
+            ///PAUSE(一時停止), STOP(停止)の場合
+            if (MedhiaPlayState.STOP == PlayState.getInstance().medhiaPlayState ||
+                MedhiaPlayState.PAUSE == PlayState.getInstance().medhiaPlayState)
+            {
+                ///拡張子を決定する
+                selectExtendState();
+                _MusicPlayer.play();
 
-            _MusicPlayer.play();
+                ///再生中の曲の行番号の取得をする
+                nowPlayIndex = this.FileNameGridView.CurrentRow.Index;
+
+                ///停止マーク表示
+                stopButtonText();
+            }
+            else //PLAY(再生中)の時
+            {
+                ///再生中曲とは別の曲が選択された場合
+                if(nowPlayIndex != this.FileNameGridView.CurrentRow.Index)
+                {
+                    ///現在の曲の停止をする
+                    _MusicPlayer.stop();
+                    
+                    ///新規選択曲の再生をする
+                    selectExtendState();
+                    _MusicPlayer.play();
+
+                    ///再生中の曲の行番号の取得をする
+                    nowPlayIndex = this.FileNameGridView.CurrentRow.Index;
+
+                    ///再生マーク表示
+                    playButtonText();
+                }
+                else ///再生中の曲が選択された場合
+                {
+                    _MusicPlayer.pause();
+
+                    ///再生マーク表示
+                    playButtonText();
+                }
+            }
         }
 
         /// <summary>
@@ -241,6 +286,22 @@ namespace MusicPlayer1
 
             ///選択しているセルの値を取得する
             getCellValueFromDataGrid();
+        }
+
+        /// <summary>
+        /// 再生ボタンマーク表示関数
+        /// </summary>
+        private void playButtonText()
+        {
+            this.PlayButton.Text = "▶";
+        }
+
+        /// <summary>
+        /// 停止ボタンマーク表示関数
+        /// </summary>
+        private void stopButtonText()
+        {
+            this.PlayButton.Text = "▮▮";
         }
     }
 }

@@ -12,6 +12,11 @@ namespace MusicPlayer1.MusicPlayerManager
         private MusicPlayController musicPlayState = null;
 
         /// <summary>
+        /// 再生状態
+        /// </summary>
+        MedhiaPlayState medhiaPlayState = MedhiaPlayState.STOP;
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="musicPlayController"></param>
@@ -29,16 +34,22 @@ namespace MusicPlayer1.MusicPlayerManager
         public void play()
         {
             this.musicPlayState.Play();
+
+            PlayState.getInstance().medhiaPlayState = MedhiaPlayState.PLAY;
         }
 
         public void pause()
         {
             this.musicPlayState.Pause();
+
+            PlayState.getInstance().medhiaPlayState = MedhiaPlayState.PAUSE;
         }
 
         public void stop()
         {
             this.musicPlayState.Stop();
+
+            PlayState.getInstance().medhiaPlayState = MedhiaPlayState.STOP;
         }
     }
 }
