@@ -1,5 +1,6 @@
 以下音楽再生試験のために使用させて頂きました。
 
+mp3
 甘茶の音楽工房
 https://amachamusic.chagasi.com/
 フィヨルドの澄んだ風
@@ -7,8 +8,18 @@ https://amachamusic.chagasi.com/
 レトロパーティー
 夢
 
-
+wav
 音楽サークル
 創作堂さくら紅葉
 https://music.yukizakura.net/free/kanata-s/020.html
 https://music.yukizakura.net/free/kanata-s/023.html
+
+
+midi
+魔王魂
+https://maou.audio/tag/midi/
+街13
+村10
+
+
+
