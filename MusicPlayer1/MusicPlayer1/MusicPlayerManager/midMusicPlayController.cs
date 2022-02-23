@@ -14,7 +14,7 @@ namespace MusicPlayer1.MusicPlayerManager
 
         ///音楽プレイヤーインスタンス
         private WindowsMediaPlayer player = new WindowsMediaPlayer();
-        private double mediaCurrentPos = 0;
+        private static double mediaCurrentPos = 0;
 
         public void Pause()
         {
@@ -46,6 +46,11 @@ namespace MusicPlayer1.MusicPlayerManager
             ///音楽の停止を実施する
             mediaCurrentPos = 0;
             player.controls.stop();
+        }
+
+        ~midMusicPlayController()
+        {
+            MessageBox.Show("mid : デストラクタ作動");
         }
     }
 }

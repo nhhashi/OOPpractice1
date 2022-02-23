@@ -13,10 +13,12 @@ namespace MusicPlayer1.MusicPlayerManager
         private string musicPath = string.Empty;
 
         private SoundPlayer player;
+        
 
         public void Pause()
         {
             MessageBox.Show("wav：一時停止します。曲名：" + this.musicPath);
+            
         }
 
         public void Play()
@@ -39,6 +41,11 @@ namespace MusicPlayer1.MusicPlayerManager
             MessageBox.Show("wav：停止します。曲名：" + this.musicPath);
 
             player.Stop();
+        }
+
+        ~wavMusicPlayController()
+        {
+            MessageBox.Show("wav : デストラクタ作動");
         }
     }
 }

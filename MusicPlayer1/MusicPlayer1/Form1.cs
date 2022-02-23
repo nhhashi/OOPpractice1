@@ -203,7 +203,11 @@ namespace MusicPlayer1
                 MedhiaPlayState.PAUSE == PlayState.getInstance().medhiaPlayState)
             {
                 ///拡張子を決定する
-                selectExtendState();
+                if (PlayState.getInstance().medhiaPlayState == MedhiaPlayState.STOP)
+                {
+                    selectExtendState();
+                }
+
                 _MusicPlayer.play();
 
                 ///再生中の曲の行番号の取得をする
@@ -222,7 +226,7 @@ namespace MusicPlayer1
                     
                     ///新規選択曲の再生をする
                     selectExtendState();
-                    _MusicPlayer.play();
+                    //_MusicPlayer.play();
 
                     ///再生中の曲の行番号の取得をする
                     nowPlayIndex = this.FileNameGridView.CurrentRow.Index;
