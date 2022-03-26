@@ -36,6 +36,8 @@ namespace MusicPlayer1
             this.NextButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
             this.SelectedFileNameLabel = new System.Windows.Forms.Label();
+            this.SortComboBox = new System.Windows.Forms.ComboBox();
+            this.SortButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FileNameGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -107,12 +109,33 @@ namespace MusicPlayer1
             this.SelectedFileNameLabel.TabIndex = 0;
             this.SelectedFileNameLabel.Text = "label1";
             // 
+            // SortComboBox
+            // 
+            this.SortComboBox.FormattingEnabled = true;
+            this.SortComboBox.Location = new System.Drawing.Point(167, 58);
+            this.SortComboBox.Name = "SortComboBox";
+            this.SortComboBox.Size = new System.Drawing.Size(121, 20);
+            this.SortComboBox.TabIndex = 2;
+            this.SortComboBox.SelectedIndexChanged += new System.EventHandler(this.SortComboBox_SelectedIndexChanged);
+            // 
+            // SortButton
+            // 
+            this.SortButton.Location = new System.Drawing.Point(295, 58);
+            this.SortButton.Name = "SortButton";
+            this.SortButton.Size = new System.Drawing.Size(68, 20);
+            this.SortButton.TabIndex = 3;
+            this.SortButton.Text = "ソート実施";
+            this.SortButton.UseVisualStyleBackColor = true;
+            this.SortButton.Click += new System.EventHandler(this.SortButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(401, 450);
+            this.Controls.Add(this.SortButton);
+            this.Controls.Add(this.SortComboBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.FileNameGridView);
             this.Name = "Form1";
@@ -133,6 +156,8 @@ namespace MusicPlayer1
         private System.Windows.Forms.Button previousButton;
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Button PlayButton;
+        private System.Windows.Forms.ComboBox SortComboBox;
+        private System.Windows.Forms.Button SortButton;
     }
 }
 

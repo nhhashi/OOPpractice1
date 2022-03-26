@@ -1,5 +1,6 @@
 ﻿using MusicPlayer1.MusicPlayerManager;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace MusicPlayer1
@@ -17,9 +18,19 @@ namespace MusicPlayer1
         string[] pathes;
 
         /// <summary>
+        /// ファイル名リスト
+        /// </summary>
+        List<string> list = new List<string>();
+
+        /// <summary>
         /// 選択曲のパス
         /// </summary>
         string selectedFilePath = string.Empty;
+
+        /// <summary>
+        /// コンボボックス
+        /// </summary>
+        string comboboxText = string.Empty;
 
         /// <summary>
         /// 選択列インデックス
@@ -56,6 +67,9 @@ namespace MusicPlayer1
         {
             ///音楽パスを取得する
             pathes = FileController.getInstance().readMusicFile();
+
+            ///コンボボックス初期化
+            selectSortOrder();
 
             ///データグリッドの初期処理をする
             adjustRowWidth();
@@ -132,6 +146,51 @@ namespace MusicPlayer1
         }
 
         /// <summary>
+        /// ソートの順序の選択関数
+        /// </summary>
+        private void selectSortOrder()
+        {
+            ///コンボボックスに追加する
+            this.SortComboBox.Items.Add("昇順");
+            this.SortComboBox.Items.Add("降順");
+        }
+
+        /// <summary>
+        /// コンボボックスの選択関数
+        /// </summary>
+        /// <param name="sender">[in]送り元</param>
+        /// <param name="e">[in]送り元</param>
+        private void SortComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboboxText = this.SortComboBox.Text;
+        }
+
+        /// <summary>
+        /// ソート実施関数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SortButton_Click(object sender, EventArgs e)
+        {
+            if (comboboxText.Equals("昇順"))
+            {
+                list.Sort();
+            }
+            else if (comboboxText.Equals("降順"))
+            {
+                list.Reverse();
+            }
+
+            ///データグリッドを消去する
+            ///データグリッドにソート後のデータを入れる
+            this.FileNameGridView.Rows.Clear();
+            foreach (string str in list)
+            {
+                this.FileNameGridView.Rows.Add(str);
+            }
+        }
+
+        /// <summary>
         /// データグリッド追加関数
         /// </summary>
         private void displayFileNameOnDataGrid()
@@ -141,8 +200,9 @@ namespace MusicPlayer1
             foreach (string str in pathes)
             {
                 string[] splitStr = str.Split('\\');
-                string[] fileName = splitStr[pathes.Length - 1].Split('.');
+                string[] fileName = splitStr[splitStr.Length - 1].Split('.');
                 this.FileNameGridView.Rows.Add(fileName[0]);
+                list.Add(fileName[0]);
             }
         }
 
