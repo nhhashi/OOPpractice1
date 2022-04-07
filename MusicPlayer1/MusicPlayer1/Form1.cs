@@ -1,6 +1,7 @@
 ﻿using MusicPlayer1.MusicPlayerManager;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MusicPlayer1
@@ -171,6 +172,12 @@ namespace MusicPlayer1
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SortButton_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(sortMethod);
+            thread.Start();
+        }
+
+        private void sortMethod()
         {
             if (comboboxText.Equals("昇順"))
             {

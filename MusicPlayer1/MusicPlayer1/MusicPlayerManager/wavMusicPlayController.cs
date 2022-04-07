@@ -42,10 +42,5 @@ namespace MusicPlayer1.MusicPlayerManager
 
             player.Stop();
         }
-
-        ~wavMusicPlayController()
-        {
-            MessageBox.Show("wav : デストラクタ作動");
-        }
     }
 }
