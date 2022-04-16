@@ -47,10 +47,5 @@ namespace MusicPlayer1.MusicPlayerManager
             mediaCurrentPos = 0;
             player.controls.stop();
         }
-
-        ~midMusicPlayController()
-        {
-            MessageBox.Show("mid : デストラクタ作動");
-        }
     }
 }

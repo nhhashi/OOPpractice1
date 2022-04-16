@@ -175,6 +175,14 @@ namespace MusicPlayer1
         {
             Thread thread = new Thread(sortMethod);
             thread.Start();
+
+            ///データグリッドを消去する
+            ///データグリッドにソート後のデータを入れる
+            this.FileNameGridView.Rows.Clear();
+            foreach (string str in list)
+            {
+                this.FileNameGridView.Rows.Add(str);
+            }
         }
 
         private void sortMethod()
@@ -186,14 +194,6 @@ namespace MusicPlayer1
             else if (comboboxText.Equals("降順"))
             {
                 list.Reverse();
-            }
-
-            ///データグリッドを消去する
-            ///データグリッドにソート後のデータを入れる
-            this.FileNameGridView.Rows.Clear();
-            foreach (string str in list)
-            {
-                this.FileNameGridView.Rows.Add(str);
             }
         }
 

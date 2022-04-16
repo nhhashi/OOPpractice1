@@ -50,10 +50,5 @@ namespace MusicPlayer1.MusicPlayerManager
             mediaCurrentPos = 0;
             player.controls.stop();
         }
-
-        ~mp3MusicPlayController()
-        {
-            MessageBox.Show("mp3 : デストラクタ作動");
-        }
     }
 }
