@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MusicPlayer1
@@ -22,6 +23,11 @@ namespace MusicPlayer1
         /// ファイル名リスト
         /// </summary>
         List<string> list = new List<string>();
+
+        /// <summary>
+        /// 日付/パスを保持するリスト
+        /// </summary>
+        Dictionary<int, string> dic = new Dictionary<int, string>();
 
         /// <summary>
         /// 選択曲のパス
@@ -173,28 +179,120 @@ namespace MusicPlayer1
         /// <param name="e"></param>
         private void SortButton_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(sortMethod);
-            thread.Start();
+            ///日付と名前を一時的に保持するリスト
+            List<int> tempList = new List<int>();
+            List<string> nameList = new List<string>();
+
+            ///前回分のディクショナリーの削除をする
+            dic.Clear();
+            foreach (string str in pathes)
+            {
+                string[] splitFile = str.Split('\\');
+                string fileName = splitFile[splitFile.Length - 1];
+                string[] name = fileName.Split('.');
+                string value = name[0];
+                string[] key = fileName.Split('_');
+                dic.Add(int.Parse(key[0]), value);
+            }
+
+            //バブルソートで記載する
+            foreach (KeyValuePair<int, string> keyValue in dic)
+            {
+                ///日付を追加する
+                tempList.Add(keyValue.Key);
+            }
+
+            ///スレッド処理でのソートの実行処理を実施する
+            Thread th = new Thread(new ThreadStart(() => 
+            {
+                tempList = bubbleMethod(tempList);
+            }));
+
+            th.Start();
+            //th.Join();
+
+            ///スレッド実行時にUIを操作で器用にする
+            while (th.IsAlive)
+            {
+                Application.DoEvents();
+            }
+
+            ///返却されたリストでデータグリッドを更新する
+            foreach (int num in tempList)
+            {
+                foreach (KeyValuePair<int, string> key in dic)
+                {
+                    if (num == key.Key)
+                    {
+                        nameList.Add(key.Value);
+                    }
+                }
+            }
 
             ///データグリッドを消去する
             ///データグリッドにソート後のデータを入れる
             this.FileNameGridView.Rows.Clear();
-            foreach (string str in list)
+            foreach (string str in nameList)
             {
                 this.FileNameGridView.Rows.Add(str);
             }
         }
 
-        private void sortMethod()
+        /// <summary>
+        /// バブルソート実行関数
+        /// </summary>
+        /// <param name="keyList">[in]日付リスト</param>
+        /// <returns>ソート後リスト</returns>
+        private List<int> bubbleMethod(List<int> keyList)
         {
+            MessageBox.Show("ソートを開始します。");
+
+            ///退避用の変数
+            int swap = 0;
+
+            ///昇順か降順化で分岐する処理
             if (comboboxText.Equals("昇順"))
             {
-                list.Sort();
+                //バブルソートで記載する
+                for (int i = 0; i < keyList.Count - 1; i++)
+                {
+                    for (int j = i + 1; j < keyList.Count; j++)
+                    {
+                        if (keyList[i] < keyList[j])
+                        {
+                            swap = keyList[i];
+                            keyList[i] = keyList[j];
+                            keyList[j] = swap;
+                        }
+
+                        ///一時停止する
+                        Thread.Sleep(100);
+                    }
+                }
             }
             else if (comboboxText.Equals("降順"))
             {
-                list.Reverse();
+                //バブルソートで記載する
+                for (int i = 0; i < keyList.Count - 1; i++)
+                {
+                    for (int j = i + 1; j < keyList.Count; j++)
+                    {
+                        if (keyList[i] > keyList[j])
+                        {
+                            swap = keyList[i];
+                            keyList[i] = keyList[j];
+                            keyList[j] = swap;
+                        }
+
+                        ///一時停止する
+                        Thread.Sleep(100);
+                    }
+                }
             }
+
+            MessageBox.Show("ソートが終了いたしました");
+
+            return keyList;
         }
 
         /// <summary>
