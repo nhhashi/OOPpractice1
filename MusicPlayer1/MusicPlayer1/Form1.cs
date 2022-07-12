@@ -181,8 +181,7 @@ namespace MusicPlayer1
         {
             ///日付と名前を一時的に保持するリスト
             List<int> tempList = new List<int>();
-            List<string> nameList = new List<string>();
-
+            
             ///前回分のディクショナリーの削除をする
             dic.Clear();
             foreach (string str in pathes)
@@ -202,49 +201,18 @@ namespace MusicPlayer1
                 tempList.Add(keyValue.Key);
             }
 
-            ///スレッド処理でのソートの実行処理を実施する
-            Thread th = new Thread(new ThreadStart(() => 
-            {
-                tempList = bubbleMethod(tempList);
-            }));
-
-            th.Start();
-            //th.Join();
-
-            ///スレッド実行時にUIを操作で器用にする
-            while (th.IsAlive)
-            {
-                Application.DoEvents();
-            }
-
-            ///返却されたリストでデータグリッドを更新する
-            foreach (int num in tempList)
-            {
-                foreach (KeyValuePair<int, string> key in dic)
-                {
-                    if (num == key.Key)
-                    {
-                        nameList.Add(key.Value);
-                    }
-                }
-            }
-
-            ///データグリッドを消去する
-            ///データグリッドにソート後のデータを入れる
-            this.FileNameGridView.Rows.Clear();
-            foreach (string str in nameList)
-            {
-                this.FileNameGridView.Rows.Add(str);
-            }
+            ///スレッド処理を実施する
+            Task.Run(() => bubbleMethod(tempList));
         }
 
         /// <summary>
-        /// バブルソート実行関数
+        /// 
         /// </summary>
-        /// <param name="keyList">[in]日付リスト</param>
-        /// <returns>ソート後リスト</returns>
-        private List<int> bubbleMethod(List<int> keyList)
+        /// <param name="keyList"></param>
+        private void bubbleMethod(List<int> keyList)
         {
+            List<string> nameList = new List<string>();
+
             MessageBox.Show("ソートを開始します。");
 
             ///退避用の変数
@@ -290,9 +258,30 @@ namespace MusicPlayer1
                 }
             }
 
-            MessageBox.Show("ソートが終了いたしました");
+            this.Invoke((Action)(() => {
 
-            return keyList;
+                MessageBox.Show("ソートが終了しました");
+
+                ///返却されたリストでデータグリッドを更新する
+                foreach (int num in keyList)
+                {
+                    foreach (KeyValuePair<int, string> key in dic)
+                    {
+                        if (num == key.Key)
+                        {
+                            nameList.Add(key.Value);
+                        }
+                    }
+                }
+
+                ///データグリッドを消去する
+                ///データグリッドにソート後のデータを入れる
+                this.FileNameGridView.Rows.Clear();
+                foreach (string str in nameList)
+                {
+                    this.FileNameGridView.Rows.Add(str);
+                }
+            }));
         }
 
         /// <summary>
