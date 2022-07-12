@@ -206,7 +206,7 @@ namespace MusicPlayer1
         }
 
         /// <summary>
-        /// 
+        /// ソートの実施関数
         /// </summary>
         /// <param name="keyList"></param>
         private void bubbleMethod(List<int> keyList)
