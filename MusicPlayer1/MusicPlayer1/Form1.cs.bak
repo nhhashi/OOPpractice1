@@ -466,6 +466,5 @@ namespace MusicPlayer1
         {
             this.PlayButton.Text = "▮▮";
         }
-#endregion
     }
 }

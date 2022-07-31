@@ -38,8 +38,12 @@ namespace MusicPlayer1
             this.SelectedFileNameLabel = new System.Windows.Forms.Label();
             this.SortComboBox = new System.Windows.Forms.ComboBox();
             this.SortButton = new System.Windows.Forms.Button();
+            this.NowTimeLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.FileNameGridView)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // FileNameGridView
@@ -64,6 +68,9 @@ namespace MusicPlayer1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.NowTimeLabel);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.previousButton);
             this.panel1.Controls.Add(this.NextButton);
             this.panel1.Controls.Add(this.PlayButton);
@@ -128,6 +135,33 @@ namespace MusicPlayer1
             this.SortButton.UseVisualStyleBackColor = true;
             this.SortButton.Click += new System.EventHandler(this.SortButton_Click);
             // 
+            // NowTimeLabel
+            // 
+            this.NowTimeLabel.AutoSize = true;
+            this.NowTimeLabel.Location = new System.Drawing.Point(264, 113);
+            this.NowTimeLabel.Name = "NowTimeLabel";
+            this.NowTimeLabel.Size = new System.Drawing.Size(50, 12);
+            this.NowTimeLabel.TabIndex = 10;
+            this.NowTimeLabel.Text = "nowTime";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Red;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 91);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 15);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(13, 97);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(300, 3);
+            this.panel2.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -143,6 +177,7 @@ namespace MusicPlayer1
             ((System.ComponentModel.ISupportInitialize)(this.FileNameGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -158,6 +193,9 @@ namespace MusicPlayer1
         private System.Windows.Forms.Button PlayButton;
         private System.Windows.Forms.ComboBox SortComboBox;
         private System.Windows.Forms.Button SortButton;
+        private System.Windows.Forms.Label NowTimeLabel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
