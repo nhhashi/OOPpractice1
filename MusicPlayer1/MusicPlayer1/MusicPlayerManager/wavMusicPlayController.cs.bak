@@ -28,7 +28,6 @@ namespace MusicPlayer1.MusicPlayerManager
 
             ///再生する
             player = new SoundPlayer(this.musicPath);
-
             player.Play();
 
             return TimeSpan.Zero;

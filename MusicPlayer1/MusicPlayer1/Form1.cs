@@ -1,8 +1,10 @@
 ﻿using MusicPlayer1.MusicPlayerManager;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace MusicPlayer1
@@ -51,6 +53,28 @@ namespace MusicPlayer1
         int nowPlayIndex = 0;
 
         /// <summary>
+        /// 座標変数
+        /// </summary>
+        Point p;
+        int xp = 0, yp = 0;
+
+        /// <summary>
+        /// タイマー変数
+        /// </summary>
+        System.Timers.Timer timer;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        bool _isDraging = false;
+        
+        /// <summary>
+        /// 再生時間と経過時間
+        /// </summary>
+        TimeSpan playBackTime = TimeSpan.Zero;
+        TimeSpan elpsedTime = TimeSpan.Zero;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public Form1()
@@ -94,6 +118,18 @@ namespace MusicPlayer1
 
             ///曲名表示ラベルの初期処理をする
             this.SelectedFileNameLabel.Text = "選曲してください";
+
+            ///シークバー
+            this.pictureBox1.MouseMove += pictureBox1_MouseMove;
+            this.pictureBox1.MouseUp += pictureBox1_MouseUp;
+            this.pictureBox1.MouseDown += pictureBox1_MouseDown;
+
+            ///タイマー
+            //イベント間隔1000ミリ秒でタイマーを初期化
+            timer = new System.Timers.Timer(3000);
+
+            //タイマーにイベントを登録
+            timer.Elapsed += OnTimedEvent;
         }
 
         /// <summary>
@@ -182,7 +218,7 @@ namespace MusicPlayer1
         {
             ///日付と名前を一時的に保持するリスト
             List<int> tempList = new List<int>();
-            
+
             ///前回分のディクショナリーの削除をする
             dic.Clear();
             foreach (string str in pathes)
@@ -366,7 +402,14 @@ namespace MusicPlayer1
                     selectExtendState();
                 }
 
-                _MusicPlayer.play();
+                ///再生時に再生時間を取得する
+                playBackTime =  _MusicPlayer.play();
+
+                //タイマーを開始する
+                timer.Start();
+
+                ///
+                setPosition(15, pictureBox1.Location.Y);
 
                 ///再生中の曲の行番号の取得をする
                 nowPlayIndex = this.FileNameGridView.CurrentRow.Index;
@@ -381,7 +424,9 @@ namespace MusicPlayer1
                 {
                     ///現在の曲の停止をする
                     _MusicPlayer.stop();
-                    
+                    //タイマーを開始する
+                    timer.Stop();
+
                     ///新規選択曲の再生をする
                     selectExtendState();
                     //_MusicPlayer.play();
@@ -397,6 +442,8 @@ namespace MusicPlayer1
                     ///現在の曲を一時停止する
                     _MusicPlayer.pause();
 
+                    //タイマーを開始する
+                    timer.Stop();
                     ///再生マーク表示
                     playButtonText();
                 }
@@ -467,5 +514,114 @@ namespace MusicPlayer1
             this.PlayButton.Text = "▮▮";
         }
 #endregion
+
+#region シークバー
+        private void OnTimedEvent(Object sender, ElapsedEventArgs e)
+        {
+            ///MessageBox.Show("カウント:" + counter.ToString());
+
+            p = this.pictureBox1.Location;
+            xp = p.X + 50;
+            yp = p.Y;
+
+            double test = playBackTime.TotalMilliseconds;
+
+            this.Invoke((Action)(() => {
+                this.pictureBox1.Left += 10;
+
+                double test1 = 300 / test;
+
+                test1 += test1;
+
+                ///位置を表示する
+                this.NowTimeLabel.Text = test1.ToString() + "/" + playBackTime;
+            }));
+        }
+
+        ///シークバーコントロール
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+            Cursor.Current = Cursors.Hand;
+            _isDraging = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            int x = 0, y = 0;
+
+            if (!_isDraging)
+            {
+                return;
+            }
+
+            if (pictureBox1.Location.X > e.X)
+            {
+                x = pictureBox1.Location.X + e.X;
+            }
+            else if (pictureBox1.Location.X < e.X)
+            {
+                x = pictureBox1.Location.X - e.X;
+            }
+
+            y = pictureBox1.Location.Y;
+
+            setPosition(x, y);   
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            int x = 0, y = 0;
+
+            Cursor.Current = Cursors.Default;
+            _isDraging = false;
+
+            ///panel1.Visible = false;
+
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+
+            x = pictureBox1.Location.X + e.X;
+            y = pictureBox1.Location.Y;
+
+            setPosition(x, y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void setPosition(int x, int y)
+        {
+            if (x <= 15) x = 15;
+            if (x >= 315) x = 315;
+            pictureBox1.Location = new Point(x, y);
+
+            ///位置を表示する
+            this.NowTimeLabel.Text = x.ToString() + "/" + playBackTime;
+        }
+        #endregion
     }
 }

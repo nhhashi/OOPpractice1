@@ -42,8 +42,7 @@ namespace MusicPlayer1.MusicPlayerManager
 
             player.Stop();
         }
-
-        [STAThread]
+[STAThread]
         public TimeSpan GetMoviePlaybackTime(string filename)
         {
             Type shellAppType = Type.GetTypeFromProgID("Shell.Application");

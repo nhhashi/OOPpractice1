@@ -10,7 +10,7 @@ namespace MusicPlayer1.MusicPlayerManager
     {
         void setMusicPath(string musicPath);
 
-        TimeSpan Play();
+        void Play();
 
         void Pause();
 

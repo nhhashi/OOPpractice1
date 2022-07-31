@@ -57,19 +57,5 @@ namespace MusicPlayer1.MusicPlayerManager
             mediaCurrentPos = 0;
             player.controls.stop();
         }
-
-        [STAThread]
-        public TimeSpan GetMoviePlaybackTime(string filename)
-        {
-            Type shellAppType = Type.GetTypeFromProgID("Shell.Application");
-            dynamic shell = Activator.CreateInstance(shellAppType);
-            Shell32.Folder objFolder = shell.NameSpace(Path.GetDirectoryName(filename));
-            Shell32.FolderItem folderItem = objFolder.ParseName(Path.GetFileName(filename));
-            string strDuration = objFolder.GetDetailsOf(folderItem, 27);
-
-            // TimeSpanに変換
-            TimeSpan ts = TimeSpan.Parse(strDuration);
-            return ts;
-        }
     }
 }
